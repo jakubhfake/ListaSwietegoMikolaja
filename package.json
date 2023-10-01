@@ -1,0 +1,40 @@
+{
+  "name": "ListaSwietegoMikolaja",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init-project": "npm install && npm-run-all init:*",
+    "init:dirs": "mkdirp records repositories utils",
+    "init:files": "README.md utils/db.js index.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "start-mongo": "cd C:/Program Files/MongoDB/Server/6.0/bin && mongod.exe",
+    "start": "npx nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakubhfake/coursesApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakubhfake/coursesApp/issues"
+  },
+  "homepage": "https://github.com/jakubhfake/coursesApp#readme",
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-watch": "^7.0.0",
+    "mkdirp": "^1.0.4",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-handlebars": "^6.0.6",
+    "method-override": "^3.0.0",
+    "mongodb": "^4.10.0",
+    "mysql2": "^2.3.3",
+    "uuid": "^9.0.0"
+  }
+}
