@@ -1,10 +1,15 @@
-const {ValidationError} = require("../utils/errors");
-const {v4: uuid}= require("uuid");
-const {pool} = require("../utils/db");
+import {ValidationError} from "../utils/errors";
+import {v4 as uuid} from "uuid";
+import {pool} from "../utils/db";
+import {ChildEntity} from "../types/child-entity";
 
-class ChildRecord {
 
-    constructor(obj) {
+class ChildRecord implements ChildEntity {
+    id?: string;
+    name: string;
+    giftId: string;
+
+    constructor(obj: ChildEntity) {
         if (!obj.name || obj.name.length < 3 || obj.name.length > 25) {
             throw new ValidationError('Imię dziecka musi mieć od 3 do 25 znaków!!!');
         }
