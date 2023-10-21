@@ -1,7 +1,9 @@
-class ValidationError extends Error {}
+import {NextFunction, Request, Response} from "express";
 
-    const
-    handleError = (err, req, res, next) => {
+export class ValidationError extends Error {}
+
+    export const
+    handleError = (err: Error, req: Request, res: Response, next: NextFunction): void => {
         // Jeżeli w moim programie byłaby możliwość, że wchodzimy do elementu, który nie istnieje to przydałaby mi się taki kod:
         /*
             if (err instanceof NotFoundError) {
@@ -21,9 +23,3 @@ class ValidationError extends Error {}
                 errorMessage: err instanceof ValidationError ? err.message : 'Przepraszamy, spróbuj ponownie za kilka minut',
             });
     };
-
-module.exports = {
-    handleError,
-    ValidationError,
-
-}
