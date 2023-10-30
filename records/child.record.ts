@@ -5,9 +5,9 @@ import {ChildEntity} from "../types/child-entity";
 
 
 class ChildRecord implements ChildEntity {
-    id?: string;
-    name: string;
-    giftId: string;
+    public id?: string;
+    public name: string;
+    public giftId: string;
 
     constructor(obj: ChildEntity) {
         if (!obj.name || obj.name.length < 3 || obj.name.length > 25) {
