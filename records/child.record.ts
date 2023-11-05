@@ -2,9 +2,10 @@ import {ValidationError} from "../utils/errors";
 import {v4 as uuid} from "uuid";
 import {pool} from "../utils/db";
 import {ChildEntity} from "../types/child-entity";
+import {FieldPacket} from "mysql2";
 
-
-class ChildRecord implements ChildEntity {
+type ChildRecordResults = [ChildRecord[], FieldPacket[]]
+export class ChildRecord implements ChildEntity {
     public id?: string;
     public name: string;
     public giftId: string;
@@ -20,7 +21,7 @@ class ChildRecord implements ChildEntity {
 
     }
 
-    async insert() {
+    async insert(): Promise<string> {
         if (!this.id) {
             this.id = uuid();
         }
@@ -34,19 +35,19 @@ class ChildRecord implements ChildEntity {
 
     }
 
-       static async listAll() {
-           const [results] = await pool.execute("SELECT * FROM `children` ORDER BY `name` ASC");
+       static async listAll(): Promise<ChildRecord[]> {
+           const [results] = await pool.execute("SELECT * FROM `children` ORDER BY `name` ASC") as ChildRecordResults;
            return results.map(obj => new ChildRecord(obj));
        }
 
-       static async getOne(id) {
+       static async getOne(id: string): Promise<ChildRecord> | null{
            const [results] = await pool.execute("SELECT * FROM `children` WHERE `id` = :id", {
                id,
-           });
+           }) as ChildRecordResults;
            return results.length === 0 ? null : new ChildRecord(results[0]);
        }
 
-    async update() {
+    async update(): Promise<void> {
         console.log('this.giftId:',this.giftId);
 
         await pool.execute("UPDATE `children` SET `name` = :name, `giftId` = :giftId WHERE `id` = :id", {
@@ -59,7 +60,3 @@ class ChildRecord implements ChildEntity {
     }
 
 }
-
-module.exports = {
-    ChildRecord,
-};
