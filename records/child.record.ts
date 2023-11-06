@@ -40,7 +40,7 @@ export class ChildRecord implements ChildEntity {
            return results.map(obj => new ChildRecord(obj));
        }
 
-       static async getOne(id: string): Promise<ChildRecord> | null{
+       static async getOne(id: string): Promise<ChildRecord | null>{
            const [results] = await pool.execute("SELECT * FROM `children` WHERE `id` = :id", {
                id,
            }) as ChildRecordResults;
