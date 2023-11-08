@@ -1,7 +1,7 @@
-const {ValidationError} = require("../utils/errors");
-const {GiftRecord} = require("../records/gift.record");
-const {ChildRecord} = require("../records/child.record");
-const {Router} = require("express");
+import {ValidationError} from "../utils/errors";
+import {Router} from "express";
+const {GiftRecord} = require ("../records/gift.record");
+const {ChildRecord} = require ("../records/child.record");
 
 const childRouter = Router();
 

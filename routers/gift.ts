@@ -1,6 +1,7 @@
-const {GiftRecord} = require("../records/gift.record");
+import {Router} from "express";
 
-const {Router} = require("express");
+import {GiftRecord} from "../records/gift.record";
+
 
 const giftRouter = Router();
 
