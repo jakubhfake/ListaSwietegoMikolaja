@@ -3,7 +3,7 @@ import {Router} from "express";
 import {GiftRecord} from "../records/gift.record";
 
 
-const giftRouter = Router();
+export const giftRouter = Router();
 
 giftRouter
 

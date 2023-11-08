@@ -3,7 +3,7 @@ import {Router} from "express";
 const {GiftRecord} = require ("../records/gift.record");
 const {ChildRecord} = require ("../records/child.record");
 
-const childRouter = Router();
+export const childRouter = Router();
 
 childRouter
 
