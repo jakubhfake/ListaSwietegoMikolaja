@@ -9,7 +9,7 @@ giftRouter
 
     .get('/', async (req, res) => {
         const giftsList = await GiftRecord.listAll();
-        res.render('gifts/list', {
+        res.json( {
             giftsList,
         });
     })

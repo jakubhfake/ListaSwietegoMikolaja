@@ -4,7 +4,7 @@ export const {v4: uuid} = require("uuid");
 export const {ValidationError} = require("../utils/errors");
 export const {pool} = require("../utils/db");
 
-type GIftRecordResult = [GiftRecord[], FieldPacket[]]
+type GiftRecordResult = [GiftRecord[], FieldPacket[]]
 export class GiftRecord {
     id?: string;
     name: string;
@@ -38,19 +38,19 @@ export class GiftRecord {
     }
 
     static async listAll(): Promise<GiftRecord[]> {
-        const [results] = await pool.execute("SELECT * FROM `gifts`") as GIftRecordResult;
+        const [results] = await pool.execute("SELECT * FROM `gifts`") as GiftRecordResult;
         return results.map(obj => new GiftRecord(obj));
     }
 
     static async getOne(id: string): Promise<GiftRecord | null> {
         const [results] = await pool.execute("SELECT * FROM `gifts` WHERE `id` = :id", {
             id,
-        }) as GIftRecordResult;
+        }) as GiftRecordResult;
         return results.length ===  0 ? null : new GiftRecord(results[0]);
     }
 
     async countGivenGift(): Promise<number> {
-        const [[{count}]] /* answer[][].count */ = await pool.execute("SELECT COUNT(*) AS `count` FROM `children` WHERE `giftId` = :id", { id: this.id,}) as GIftRecordResult;
+        const [[{count}]] /* answer[][].count */ = await pool.execute("SELECT COUNT(*) AS `count` FROM `children` WHERE `giftId` = :id", { id: this.id,}) as GiftRecordResult;
         return count;
     }
 }
