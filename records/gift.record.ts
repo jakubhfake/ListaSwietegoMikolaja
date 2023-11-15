@@ -1,11 +1,12 @@
 import {FieldPacket} from "mysql2";
+import {GiftEntity} from "../types";
 
 export const {v4: uuid} = require("uuid");
 export const {ValidationError} = require("../utils/errors");
 export const {pool} = require("../utils/db");
 
 type GiftRecordResult = [GiftRecord[], FieldPacket[]]
-export class GiftRecord {
+export class GiftRecord implements GiftEntity{
     id?: string;
     name: string;
     count: number;

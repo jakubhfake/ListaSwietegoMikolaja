@@ -1,7 +1,7 @@
 import {ValidationError} from "../utils/errors";
 import {v4 as uuid} from "uuid";
 import {pool} from "../utils/db";
-import {ChildEntity} from "../types/child-entity";
+import {ChildEntity} from "../types";
 import {FieldPacket} from "mysql2";
 
 type ChildRecordResults = [ChildRecord[], FieldPacket[]]
