@@ -20,6 +20,6 @@ export class ValidationError extends Error {}
         res
             .status(err instanceof ValidationError ? 400 : 500)
             .json( {
-                errorMessage: err instanceof ValidationError ? err.message : 'Sorry, please try again later.',
+                message: err instanceof ValidationError ? err.message: 'Sorry, please try again later.',
             });
     };
