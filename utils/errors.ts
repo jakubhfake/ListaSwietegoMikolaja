@@ -19,7 +19,7 @@ export class ValidationError extends Error {}
 
         res
             .status(err instanceof ValidationError ? 400 : 500)
-            .render('errors/error', {
-                errorMessage: err instanceof ValidationError ? err.message : 'Przepraszamy, spróbuj ponownie za kilka minut',
+            .json( {
+                errorMessage: err instanceof ValidationError ? err.message : 'Sorry, please try again later.',
             });
     };
