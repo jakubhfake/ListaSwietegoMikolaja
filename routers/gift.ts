@@ -29,16 +29,14 @@ giftRouter
         const gift = await GiftRecord.getOne(req.params.id);
 
         if(!gift) {
-            throw new ValidationError('No such gift!')
+            throw new ValidationError('No such gift!');
         }
 
         if (await gift.countGivenGift() > 0) {
-            throw new ValidationError('Cannot remove given gift.')
+            throw new ValidationError('Cannot remove given gift.');
         }
+        console.log('gift', gift);
+        await gift.delete();
 
         res.end();
     });
-
-module.exports = {
-    giftRouter,
-};
