@@ -1,5 +1,3 @@
-export interface GiftEntity {
-    id?: string;
-    name: string;
-    count: number;
-}
+import {GiftEntity} from "./gift-entity";
+
+export type CreateGiftReq = Omit<GiftEntity, 'id'>

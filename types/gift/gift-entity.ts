@@ -1,4 +1,5 @@
-export interface CreateGiftReq {
+export interface GiftEntity {
+    id?: string;
     name: string;
     count: number;
 }
