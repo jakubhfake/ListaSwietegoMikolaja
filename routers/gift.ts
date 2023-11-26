@@ -19,7 +19,7 @@ giftRouter
         const newGift = new GiftRecord(req.body);
         await newGift.insert();
 
-        res.redirect('/gift');
+        res.json(newGift);
     })
     .delete('/:id', async (req, res) => {
         const gift = await GiftRecord.getOne(req.params.id);
