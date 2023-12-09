@@ -10,11 +10,11 @@ export const giftRouter = Router();
 giftRouter
 
     .get('/:giftId', async (req, res) => {
-        const singleGift = await GiftRecord.getOne(req.params.giftId);
-        const givenCount = await singleGift.countGivenGift()
+        const gift = await GiftRecord.getOne(req.params.giftId);
+        const givenCount = await gift.countGivenGift()
 
-        res.json( {
-            singleGift,
+        res.json({
+            gift,
             givenCount,
         } as GetSingleGiftRes);
     })
