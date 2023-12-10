@@ -1,5 +1,6 @@
 import {ValidationError} from "../utils/errors";
 import {Router} from "express";
+import {ListChildrenRes} from "../types/child/child";
 const {GiftRecord} = require ("../records/gift.record");
 const {ChildRecord} = require ("../records/child.record");
 
@@ -11,17 +12,17 @@ childRouter
         const childrenList = await ChildRecord.listAll();
         const giftsList = await GiftRecord.listAll();
 
-        res.render('children/list', {
+        res.json( {
             childrenList,
             giftsList,
-        });
+        } as ListChildrenRes);
     })
     .post('/', async (req, res) => {
 
         const newChild = new ChildRecord(req.body);
         await newChild.insert();
 
-        res.redirect('/child');
+        res.json(newChild);
     })
     .patch('/gift/:childId', async (req, res) => {
         const child = await ChildRecord.getOne(req.params.childId);
@@ -43,7 +44,8 @@ childRouter
         child.giftId = gift?.id ?? null; // co to oznacza???
         await child.update();
 
-        res.redirect('/child');
+        res.json(child);
+
 
     });
 
