@@ -1,8 +1,8 @@
 import {ValidationError} from "../utils/errors";
 import {Router} from "express";
-import {ListChildrenRes} from "../types/child/child";
-const {GiftRecord} = require ("../records/gift.record");
-const {ChildRecord} = require ("../records/child.record");
+import {ListChildrenRes} from "../types";
+import {GiftRecord} from "../records/gift.record";
+import {ChildRecord} from "../records/child.record";
 
 export const childRouter = Router();
 
