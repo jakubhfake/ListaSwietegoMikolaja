@@ -26,12 +26,15 @@ childRouter
     })
     .patch('/gift/:childId', async (req, res) => {
         const child = await ChildRecord.getOne(req.params.childId);
+        const {body}: {
+            body: SetGiftForChildReq;
+        } = req;
 
         if(child === null) {
             throw new ValidationError('Dziecka o podanym ID nie ma na liście Św. Mikołaja, było chyba niegrzeczne :)')
         }
 
-        const gift = (req.body as SetGiftForChildReq).giftId === '' ? null : await GiftRecord.getOne(req.body.giftId);
+        const gift = body.giftId === '' ? null : await GiftRecord.getOne(body.giftId);
 
         if (gift) {
             if (gift.count <= await gift.countGivenGift()) {
