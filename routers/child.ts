@@ -1,6 +1,6 @@
 import {ValidationError} from "../utils/errors";
 import {Router} from "express";
-import {ListChildrenRes} from "../types";
+import {CreateChildRes, ListChildrenRes, SetGiftForChildReq} from "../types";
 import {GiftRecord} from "../records/gift.record";
 import {ChildRecord} from "../records/child.record";
 
@@ -19,7 +19,7 @@ childRouter
     })
     .post('/', async (req, res) => {
 
-        const newChild = new ChildRecord(req.body);
+        const newChild = new ChildRecord(req.body as CreateChildRes);
         await newChild.insert();
 
         res.json(newChild);
@@ -31,7 +31,7 @@ childRouter
             throw new ValidationError('Dziecka o podanym ID nie ma na liście Św. Mikołaja, było chyba niegrzeczne :)')
         }
 
-        const gift = req.body.giftId === '' ? null : await GiftRecord.getOne(req.body.giftId);
+        const gift = (req.body as SetGiftForChildReq).giftId === '' ? null : await GiftRecord.getOne(req.body.giftId);
 
         if (gift) {
             if (gift.count <= await gift.countGivenGift()) {
@@ -45,7 +45,6 @@ childRouter
         await child.update();
 
         res.json(child);
-
 
     });
 
